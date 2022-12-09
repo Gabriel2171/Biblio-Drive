@@ -11,11 +11,28 @@
 <body class="container">
     <div>
         <nav class="navbar navbar-expand-sm bg-success">
-            <form action = "index.php" method = Get >
-            <input type="texte" name="nom"size="60">
+            <form action = "entete.php" method = "get" >
+            <input type="texte" placeholder="Saisir un auteur..."name="nom"size="60">
             <input type="submit" name="rechercher" value="rechercher">
             </form>
-            </nav>
+            <img src="image/logo.jpg"height="60"> 
+        </nav>
     </div>
+
+ <?php
+    if (isset($_REQUEST["rechercher"])){
+        require_once('connexion.php');
+        $nom = $_GET['nom'];
+        $select = $connexion->prepare ("SELECT titre FROM auteur, livre WHERE auteur.noauteur = livre.noauteur and auteur.nom=:nom");
+        $select->bindValue(":nom",$nom);
+        $select->setFetchMode(PDO::FETCH_OBJ);
+        $select->execute();
+          while($enregistrement = $select->fetch())
+        {
+          echo '<h6>'.$enregistrement->titre.'</h6>';
+        }
+      }
+ ?>
 </body>
+
 
