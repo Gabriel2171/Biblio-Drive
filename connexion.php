@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="fr">
 <?php
 // Connexion au serveur
 try {
@@ -10,4 +12,3 @@ try {
   die();
 }
 ?>
-
