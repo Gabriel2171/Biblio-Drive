@@ -1,0 +1,6 @@
+git config --global user.email "adresse mail"
+git config --global user.name "name"
+git add .
+git ls-files liste tout les fichier 
+git commit -m " nom donner "
+git push origin master --force

@@ -12,25 +12,25 @@
 <h5>La Bibliothéque de Moulinsart est fermé au public jusqu'a nouvel ordre Mais il vous est possible de reserver et de retirer vos livre via notre service Biblio-Drive !</h5>
 <body class="container">
 
-        <nav class="navbar navbar-expand-sm">
+        <nav class="navbar navbar-expand-sm"> <!-- la navbar -->
             <form action = "listerlivre.php" method = "get" >
-            <input type="texte" placeholder="Rechercher dans le catalogue (saisir le nom de l'auteur )"name="nom"size="68">
+            <input type="texte" placeholder="Rechercher dans le catalogue (saisir le nom de l'auteur )"name="nom"size="68"><!-- texte dans la navbar -->
            <input type="submit" name="rechercher" value="rechercher">
-          
+           <a href="mention-legale.php">mention-légale</a>
             </form>
         </nav>
         <?php
           if (isset($_REQUEST["rechercher"])){
-          require_once('connexion.php');
-          $nom = $_GET['nom'];
-          $select = $connexion->prepare("SELECT titre FROM auteur, livre WHERE auteur.noauteur = livre.noauteur and auteur.nom=:nom");
-          $select->bindValue(":nom",$nom);
-          $select->setFetchMode(PDO::FETCH_OBJ);
-          $select->execute();
-          while($enregistrement = $select->fetch())
-          {
-          echo'<a href="détaillelivre.php">'.$enregistrement->titre.'</a>';
-          }
-          }
+            require_once('connexion.php');
+            $nom = $_GET['nom'];
+            $select = $connexion->prepare("SELECT titre,nolivre FROM auteur, livre WHERE auteur.noauteur = livre.noauteur and auteur.nom=:nom");//on selection le titre et le nolivre dans auteurs .noauteur 
+            $select->bindValue(":nom",$nom);// pour eviter la conncatenation 
+            $select->setFetchMode(PDO::FETCH_OBJ);
+            $select->execute();// on execute la requete 
+            while($enregistrement = $select->fetch())
+              {
+                echo'<a href="détaillelivre.php?numerolivre='.$enregistrement->nolivre.'"><h5>'.$enregistrement->titre.'</h5></a>';// lien clicable qui va aller sur détaille livre
+              }
+            }
         ?>
 </booy>

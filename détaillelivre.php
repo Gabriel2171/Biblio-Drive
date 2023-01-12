@@ -28,70 +28,21 @@ session_start();
       <div class="col-sm-9">
         <?php include "entete.php"?>
       </div>
-      <div class="col-sm-3"><img src="image/logo.jpg" align="RIGHT" class="img-thumbnail" alt="logoimg" style="width:450px;height:250px;"></div>
+      <div class="col-sm-3"><img src="image/logo.jpg" align="RIGHT" class="img-thumbnail" alt="logoimg" style="width:300px;height:250px;"></div>
     </div>
     <br>
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-9">
         <?php
             if(!empty($_REQUEST['icode']))
-            {
-                $stmt = $connexion->prepare("SELECT * FROM livre where image=:image"); // n vien prendre tout de la tables livre pour pouvoir afficher ce que l'on veut.
-                $stmt->bindValue(":image", $_REQUEST["icode"]);
-                $stmt->setFetchMode(PDO::FETCH_OBJ);
-                $stmt->execute();
-                $enregistrement = $stmt->fetch();
-                $stmt2 = $connexion->prepare("SELECT * FROM auteur WHERE noauteur = :noauteur");
-                $stmt2->bindValue(":noauteur", $enregistrement->noauteur);
-                $stmt2->setFetchMode(PDO::FETCH_OBJ);
-                $stmt2->execute();
-                $enregistrement2 = $stmt2->fetch();
-                echo '<h5>ISBN13 : '.$enregistrement->isbn13.'</h5>';
-                echo '<h5>Auteur : '.$enregistrement2->prenom.' '.$enregistrement2->nom.'</h5>';
-                echo '<img src="'.$enregistrement->image.'" class="les miserables" name="imageavecdescription" id="image" style="width:400px;height:500px;">';
-            }
-            else
-            {
-                echo "";
-            }
-        ?>
-        </div>
-        <div class="col-sm-6">
-        <?php
-        if(!empty($_REQUEST['icode']))
-        {
-            $stmt = $connexion->prepare("SELECT * FROM livre where image=:image");
-            $stmt->bindValue(":image", $_REQUEST["icode"]);
-            $stmt->setFetchMode(PDO::FETCH_OBJ);
-            $stmt->execute();
-            $enregistrement = $stmt->fetch();
-            echo '<br><br><br>';
-            echo '<h2>Résumé de : '.$enregistrement->titre.'</h2>';
-            echo '<p>'.$enregistrement->resume.'</p>';
-            if(!empty($_SESSION['permission']))
-            {
-              if($_SESSION['permission'] == "user")
-              {
-                echo '<br><form action="panier.php" method="POST">
-                <button type="submit" class="btn btn-primary" id="reserv" name="reserv" value='.$enregistrement->isbn13.'>
-                Emprunter (ajout au panier)
-                </button>
-                </form>';
-              }
-              else
-              {
-                echo "<br><h4>Pour réserver vous devez posséder un compte membre</h4>";
-              }
-            }
-            else
-            {
-              echo "<br><h4>Pour réserver vous devez posséder un compte membre</h4>";
-            }
-        }
-        else
-        {
-            echo "";
-        }
+            require_once('connexion.php');
+            $numero = $_GET['numerolivre'];
+            $select = $connexion->prepare("SELECT * FROM  livre WHERE livre.nolivre=:nolivre"); //requete ou on va aller chercher dans livre le nolivre 
+          $select->bindValue(":nolivre",$numero); // eviter le concatenation 
+          $select->setFetchMode(PDO::FETCH_OBJ);
+          $select->execute(); // on execute la requete 
+          $enregistrement = $select->fetch();
+          echo'<h5>Titre :</h5><p> '.$enregistrement->titre.'</p><br><h5> Resumer :</h5></p> '.$enregistrement->resume.'<br></p><img class="img" src="'.$enregistrement->image.'">'; // on va afficher dans notre page les requete
         ?>
       </div>
       <div class="col-sm-3">
@@ -100,6 +51,7 @@ session_start();
         </div>
       </div>
     </div>
+</div>
   </div>
 </body>
 </html>

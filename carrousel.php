@@ -14,7 +14,7 @@
           <div class="carousel-item active">
             <img src="image/le feuilleton d'hermes.jpg" class="d-block w-100" alt="le feuilleton d'hermes" style="width:200px;height:200px;">
           <div class="carousel-item">
-          <img src="image/terte.jpg" class="d-block w-100" alt="les miserables" style="width:200px;height:200px;">
+          <img src="image/les misérables.jpg" class="d-block w-100" alt="les miserables" style="width:200px;height:200px;">
           </div>
           <div class="carousel-item">
          <img src="image/tourdumonde.jpg" class="d-block w-100" alt="tourdumonde"style="width:200px;height:200px;">
