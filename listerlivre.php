@@ -33,12 +33,11 @@
         echo '<h2>Vous recherchez : '.$enregistrement->prenom.' '.$enregistrement->nom.'</h2>';
         while($enregistrement2 = $stmt2->fetch())
      {
-      echo '<a href="detail.php?nolivre=',$enregistrement->nolivre, '">', $enregistrement->titre, ' </a><br>'; // on va transferer le resultat de la requete dans le fichier détail.php
+      echo '<a href="detailzzzzzzzzzzz.php?nolivre=',$enregistrement2->nolivre, '">', $enregistrement->titre, ' </a><br>'; // on va transferer le resultat de la requete dans le fichier détail.php
      }
       }        
     ?>
- 
-    <div class="col-md-3"><div class="border border-sucess p-3 mb-3"><?php include "formulaire.php"?></div></div>
+    <div class="col-md-3"><div class="border border-sucess p-3 mb-3"><?php include "formulaire_pour_utilisateur.php"?></div></div>
     </div>
     </div>
   </body>

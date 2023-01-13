@@ -2,8 +2,8 @@
 <html lang="fr">
     <form action="authentification.php" method="post">
         <h4>Se connecter</h4>
-        identifiant<input type="text" name="prenom">
-        mot_de_passe<input type="text" name="mot_de_passe">
+        identifiant<input type="text" name="prenom"pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        mot_de_passe<input type="text" name="mot_de_passe"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
        <input type="submit"value="connexion"name="ok">
 </from>
 <?php

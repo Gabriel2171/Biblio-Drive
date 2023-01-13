@@ -17,6 +17,9 @@
             <input type="texte" placeholder="Rechercher dans le catalogue (saisir le nom de l'auteur )"name="nom"size="68"><!-- texte dans la navbar -->
            <input type="submit" name="rechercher" value="rechercher">
            <a href="mention-legale.php">mention-légale</a>
+           <a href="page_ajouter_user.php">page ajouter user</a>
+           <a href="page_pour_ajouter_livre.php">page ajouter livre</a>
+           <a href="accueil.php">accueil</a>
             </form>
         </nav>
         <?php

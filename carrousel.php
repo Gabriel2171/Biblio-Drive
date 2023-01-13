@@ -1,4 +1,4 @@
-!doctype html>
+
 <html lang="fr">
   <head>
     <meta charset="utf-8">
@@ -8,28 +8,36 @@
     <link href="style.css>
     <title>Document</title>
     <link rel="stylesheet href="carrousel.css"/>
+    <h4>Dernière acquisitions</h4>
 </head>
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="image/le feuilleton d'hermes.jpg" class="d-block w-100" alt="le feuilleton d'hermes" style="width:200px;height:200px;">
-          <div class="carousel-item">
-          <img src="image/les misérables.jpg" class="d-block w-100" alt="les miserables" style="width:200px;height:200px;">
-          </div>
-          <div class="carousel-item">
-         <img src="image/tourdumonde.jpg" class="d-block w-100" alt="tourdumonde"style="width:200px;height:200px;">
-          </div>
-          <div class="carousel-item">
-          <img src="image/Voyage au centre de la terre.jpg" class="d-block w-100" alt="Voyage au centre de la terre"style="width:200px;height:200px;">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+<body>
+ <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"> <!-- Carroussel  -->
+ <div class="carousel-inner"> 
+<?php 
+ require_once('connexion.php');
+$select = $connexion->prepare("SELECT image, nolivre FROM livre ORDER BY dateajout DESC LIMIT 2"); // Contenu du caroussel
+$select->setFetchMode(PDO::FETCH_OBJ);
+$select->execute();
+ if($enregistrement = $select->fetch())
+ {
+echo '<div class="carousel-item active">';
+echo'<img class="d-block w-200" src='.$enregistrement->image.'>';  
+echo '</div>'; 
+ } 
+ while($enregistrement = $select->fetch()){
+echo '<div class="carousel-item">';
+echo'<img class="d-block w-200" src='.$enregistrement->image.'>';
+echo '</div>';
+}
+ ?>
+ </div>
+<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <!-- Flèches du caroussel -->
+ <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+ <span class="sr-only">Previous</span>
+ </a>
+<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+</a>
+ </div>
+</body>
+</html>
